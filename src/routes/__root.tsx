@@ -77,20 +77,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Digital Creators Hub — Your Complete Business Growth Partner" },
+      {
+        name: "description",
+        content:
+          "Digital Creators Hub helps businesses grow with Digital Marketing, AI Automation, Websites, Local SEO, Google Business Profile, Social Media, CRM, QR Systems and WhatsApp Automation.",
+      },
+      { name: "author", content: "Digital Creators Hub" },
+      { property: "og:title", content: "Digital Creators Hub — Business Growth Partner" },
+      {
+        property: "og:description",
+        content: "A strong business starts with strong marketing. Premium digital growth solutions under one roof.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap",
       },
+      { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
@@ -99,6 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
+
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
