@@ -141,9 +141,8 @@ export function Hero() {
             </motion.div>
 
             <div className="relative flex h-full flex-col items-center justify-center gap-6">
-              {/* Replace with uploaded official logo asset when provided */}
-              <div className="scale-[3]">
-                <Logo size={48} withWordmark={false} />
+              <div className="scale-[2]">
+                <Logo size={140} withWordmark={false} />
               </div>
               <div className="text-center">
                 <div className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
@@ -154,6 +153,7 @@ export function Hero() {
                 </div>
               </div>
             </div>
+
           </div>
         </motion.div>
       </div>
