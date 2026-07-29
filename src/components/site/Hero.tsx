@@ -140,9 +140,14 @@ export function Hero() {
               <div className="h-2 w-2 rounded-full bg-[oklch(0.82_0.19_155)] shadow-[0_0_18px_oklch(0.82_0.19_155)]" />
             </motion.div>
 
-            <div className="relative flex h-full items-center justify-center">
-            <Logo size={280} withWordmark={false} />
+            <div className="relative flex h-full flex-col items-center justify-center gap-4">
+            <Logo size={220} withWordmark={false} />
+            <div className="text-center">
+            <div className="mt-1 text-sm text-gradient-brand font-semibold">
+            Growth. Automated. Beautifully.
             </div>
+          </div>
+        </div>
 
           </div>
         </motion.div>
