@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import logoAsset from "@/assets/dch-logo.png.asset.json";
 
 type Props = { size?: number; withWordmark?: boolean; className?: string };
 
@@ -14,7 +13,7 @@ export function Logo({ size = 40, withWordmark = true, className = "" }: Props) 
         style={{ width: size, height: size }}
       >
         <img
-          src={logoAsset.url}
+          src="/dch-logo.png"
           alt="Digital Creators Hub"
           width={size}
           height={size}
