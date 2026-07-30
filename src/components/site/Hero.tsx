@@ -1,7 +1,26 @@
+import { useRef, useState } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, Sparkles, Phone } from "lucide-react";
+import { ArrowRight, Sparkles, Phone, Play, Pause, Volume2, VolumeX } from "lucide-react";
 
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(true);
+  const [muted, setMuted] = useState(true);
+
+  function togglePlay() {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) v.play();
+    else v.pause();
+  }
+
+  function toggleMute() {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setMuted(v.muted);
+  }
+
   return (
     <section id="home" className="relative overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-32">
       {/* Background layers */}
@@ -108,10 +127,11 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative mx-auto w-full max-w-md"
+          className="relative mx-auto w-full max-w-[280px] sm:max-w-[320px]"
         >
-          <div className="relative aspect-square overflow-hidden rounded-3xl glass-strong glow-ring">
+          <div className="relative aspect-[480/854] overflow-hidden rounded-3xl glass-strong glow-ring">
             <video
+              ref={videoRef}
               className="absolute inset-0 h-full w-full object-cover"
               src="/Haveli_Ad.mp4"
               autoPlay
@@ -119,6 +139,8 @@ export function Hero() {
               loop
               playsInline
               aria-label="Client video testimonial"
+              onPlay={() => setPlaying(true)}
+              onPause={() => setPlaying(false)}
             />
             <div
               aria-hidden
@@ -128,6 +150,31 @@ export function Hero() {
                   "linear-gradient(to top, oklch(0.1 0.02 265 / 0.75) 0%, oklch(0.1 0.02 265 / 0.1) 45%, transparent 70%)",
               }}
             />
+
+            {/* Playback controls */}
+            <div className="absolute right-3 top-3 z-10 flex items-center gap-2">
+              <button
+                type="button"
+                onClick={togglePlay}
+                aria-label={playing ? "Pause video" : "Play video"}
+                className="grid h-9 w-9 place-items-center rounded-full glass text-white/90 backdrop-blur-md transition hover:bg-white/20"
+              >
+                {playing ? (
+                  <Pause className="h-4 w-4" />
+                ) : (
+                  <Play className="h-4 w-4 translate-x-[1px]" />
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={toggleMute}
+                aria-label={muted ? "Unmute video" : "Mute video"}
+                className="grid h-9 w-9 place-items-center rounded-full glass text-white/90 backdrop-blur-md transition hover:bg-white/20"
+              >
+                {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+              </button>
+            </div>
+
             <div className="absolute inset-x-0 bottom-0 p-5 text-center">
               <div className="text-sm font-semibold text-gradient-brand">
                 Growth. Automated. Beautifully.
