@@ -9,6 +9,7 @@ import {
   Volume2,
   VolumeX,
   ChevronRight,
+  ChevronLeft,
 } from "lucide-react";
 
 const VIDEOS = [
@@ -48,6 +49,10 @@ export function Hero() {
 
   function nextVideo() {
     setVideoIndex((i) => (i + 1) % VIDEOS.length);
+  }
+
+  function prevVideo() {
+    setVideoIndex((i) => (i - 1 + VIDEOS.length) % VIDEOS.length);
   }
 
   return (
@@ -241,6 +246,19 @@ export function Hero() {
           >
             <Sparkles className="h-6 w-6 text-[oklch(0.65_0.24_300)]" />
           </motion.div>
+          <motion.button
+            type="button"
+            onClick={prevVideo}
+            aria-label="Previous video"
+            className="absolute top-1/3 -left-8 grid h-12 w-12 place-items-center rounded-2xl glass transition hover:bg-white/15"
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+          >
+            <ChevronLeft
+              className="h-5 w-5 text-[oklch(0.82_0.19_155)]"
+              style={{ filter: "drop-shadow(0 0 6px oklch(0.82 0.19 155 / 0.7))" }}
+            />
+          </motion.button>
           <motion.button
             type="button"
             onClick={nextVideo}
