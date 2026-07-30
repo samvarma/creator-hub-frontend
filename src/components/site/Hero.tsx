@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { ArrowRight, Sparkles, Phone } from "lucide-react";
-import { Logo } from "./Logo";
 
 export function Hero() {
   return (
@@ -104,52 +103,61 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Right — Logo showcase card */}
+        {/* Right — Video testimonial card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative mx-auto w-full max-w-md"
         >
-          <div className="relative aspect-square rounded-3xl glass-strong p-8 glow-ring">
+          <div className="relative aspect-square overflow-hidden rounded-3xl glass-strong glow-ring">
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              src="/Haveli_Ad.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-label="Client video testimonial"
+            />
             <div
               aria-hidden
-              className="absolute inset-0 rounded-3xl"
-              style={{ background: "var(--gradient-glow)" }}
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to top, oklch(0.1 0.02 265 / 0.75) 0%, oklch(0.1 0.02 265 / 0.1) 45%, transparent 70%)",
+              }}
             />
-            {/* Floating AI orbs */}
-            <motion.div
-              className="absolute -top-6 -left-6 h-16 w-16 rounded-2xl glass grid place-items-center"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <div className="h-3 w-3 rounded-full bg-[oklch(0.82_0.15_200)] shadow-[0_0_20px_oklch(0.82_0.15_200)]" />
-            </motion.div>
-            <motion.div
-              className="absolute -bottom-8 -right-4 h-20 w-20 rounded-3xl glass grid place-items-center"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <Sparkles className="h-6 w-6 text-[oklch(0.65_0.24_300)]" />
-            </motion.div>
-            <motion.div
-              className="absolute top-1/3 -right-8 h-12 w-12 rounded-2xl glass grid place-items-center"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            >
-              <div className="h-2 w-2 rounded-full bg-[oklch(0.82_0.19_155)] shadow-[0_0_18px_oklch(0.82_0.19_155)]" />
-            </motion.div>
-
-            <div className="relative flex h-full flex-col items-center justify-center gap-4">
-            <Logo size={220} withWordmark={false} />
-            <div className="text-center">
-            <div className="mt-1 text-sm text-gradient-brand font-semibold">
-            Growth. Automated. Beautifully.
+            <div className="absolute inset-x-0 bottom-0 p-5 text-center">
+              <div className="text-sm font-semibold text-gradient-brand">
+                Growth. Automated. Beautifully.
+              </div>
+              <div className="mt-1 text-xs text-white/70">Client success story</div>
             </div>
           </div>
-        </div>
 
-          </div>
+          {/* Floating AI orbs */}
+          <motion.div
+            className="absolute -top-6 -left-6 h-16 w-16 rounded-2xl glass grid place-items-center"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="h-3 w-3 rounded-full bg-[oklch(0.82_0.15_200)] shadow-[0_0_20px_oklch(0.82_0.15_200)]" />
+          </motion.div>
+          <motion.div
+            className="absolute -bottom-8 -right-4 h-20 w-20 rounded-3xl glass grid place-items-center"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Sparkles className="h-6 w-6 text-[oklch(0.65_0.24_300)]" />
+          </motion.div>
+          <motion.div
+            className="absolute top-1/3 -right-8 h-12 w-12 rounded-2xl glass grid place-items-center"
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          >
+            <div className="h-2 w-2 rounded-full bg-[oklch(0.82_0.19_155)] shadow-[0_0_18px_oklch(0.82_0.19_155)]" />
+          </motion.div>
         </motion.div>
       </div>
     </section>
