@@ -1,11 +1,36 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, Sparkles, Phone, Play, Pause, Volume2, VolumeX } from "lucide-react";
+import {
+  ArrowRight,
+  Sparkles,
+  Phone,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  ChevronRight,
+} from "lucide-react";
+
+const VIDEOS = [
+  { src: "/DCH_Ad.mp4", caption: "Digital Creators Hub" },
+  { src: "/Haveli_Ad.mp4", caption: "Client success story" },
+];
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoIndex, setVideoIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(true);
+
+  // Load + play the newly selected video whenever the index changes
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.load();
+    v.muted = muted;
+    if (playing) v.play().catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoIndex]);
 
   function togglePlay() {
     const v = videoRef.current;
@@ -19,6 +44,10 @@ export function Hero() {
     if (!v) return;
     v.muted = !v.muted;
     setMuted(v.muted);
+  }
+
+  function nextVideo() {
+    setVideoIndex((i) => (i + 1) % VIDEOS.length);
   }
 
   return (
@@ -133,14 +162,14 @@ export function Hero() {
             <video
               ref={videoRef}
               className="absolute inset-0 h-full w-full object-cover"
-              src="/Haveli_Ad.mp4"
+              src={VIDEOS[videoIndex].src}
               autoPlay
               muted
-              loop
               playsInline
               aria-label="Client video testimonial"
               onPlay={() => setPlaying(true)}
               onPause={() => setPlaying(false)}
+              onEnded={nextVideo}
             />
             <div
               aria-hidden
@@ -179,7 +208,21 @@ export function Hero() {
               <div className="text-sm font-semibold text-gradient-brand">
                 Growth. Automated. Beautifully.
               </div>
-              <div className="mt-1 text-xs text-white/70">Client success story</div>
+              <div className="mt-1 text-xs text-white/70">{VIDEOS[videoIndex].caption}</div>
+              <div className="mt-3 flex items-center justify-center gap-1.5">
+                {VIDEOS.map((v, i) => (
+                  <button
+                    key={v.src}
+                    type="button"
+                    onClick={() => setVideoIndex(i)}
+                    aria-label={`Show video ${i + 1}: ${v.caption}`}
+                    aria-current={i === videoIndex}
+                    className={`h-1.5 rounded-full transition-all ${
+                      i === videoIndex ? "w-5 bg-white" : "w-1.5 bg-white/40 hover:bg-white/60"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
@@ -198,13 +241,19 @@ export function Hero() {
           >
             <Sparkles className="h-6 w-6 text-[oklch(0.65_0.24_300)]" />
           </motion.div>
-          <motion.div
-            className="absolute top-1/3 -right-8 h-12 w-12 rounded-2xl glass grid place-items-center"
+          <motion.button
+            type="button"
+            onClick={nextVideo}
+            aria-label="Next video"
+            className="absolute top-1/3 -right-8 grid h-12 w-12 place-items-center rounded-2xl glass transition hover:bg-white/15"
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
           >
-            <div className="h-2 w-2 rounded-full bg-[oklch(0.82_0.19_155)] shadow-[0_0_18px_oklch(0.82_0.19_155)]" />
-          </motion.div>
+            <ChevronRight
+              className="h-5 w-5 text-[oklch(0.82_0.19_155)]"
+              style={{ filter: "drop-shadow(0 0 6px oklch(0.82 0.19 155 / 0.7))" }}
+            />
+          </motion.button>
         </motion.div>
       </div>
     </section>
